@@ -68,8 +68,10 @@
 
                     if(mysqli_num_rows($result1) > 0){
 
+                        //total_records = 7
                         $total_records = mysqli_num_rows($result1);
                         
+                        //lomit per page limit=3
                         $total_page = ceil($total_records / $limit);
 
                         echo '<ul class="pagination admin-pagination">';

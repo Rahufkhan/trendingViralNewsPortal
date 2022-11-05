@@ -17,13 +17,11 @@
         <link rel="stylesheet" href="font/font-awesome-4.7.0/css/font-awesome.css">
         <link rel="stylesheet" href="../css/style.css">
     </head>
-
-    <body>
         <div id="wrapper-admin" class="body-content">
             <div class="container">
                 <div class="row">
                     <div class="col-md-offset-4 col-md-4">
-                        <img class="logo" src="images/news.jpg">
+                        <img class="logo" src="images/news1.png" style="height : 180px;">
                         <h3 class="heading">Admin</h3>
                         <!-- Form Start -->
                         <form  action="<?php $_SERVER['PHP_SELF']; ?>" method ="POST">
