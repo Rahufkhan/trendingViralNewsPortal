@@ -14,7 +14,7 @@
     $qry="SELECT * FROM category ORDER BY category_id DESC LIMIT {$offset},{$limit}";
     $result = mysqli_query($conn,$qry);
     
-    if(mysqli_num_rows($result) > 0){
+    if(mysqli_num_rows($result) >= 0){
 ?>
 <div id="admin-content">
     <div class="container">
