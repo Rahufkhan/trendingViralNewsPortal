@@ -30,7 +30,24 @@
                 <div class="row">
                     <!-- LOGO -->
                     <div class="col-md-2">
-                        <a href="post.php"><img class="logo" src="images/news1.png"></a>
+                    <?php
+                        include "config.php";
+
+                        $sql = "SELECT * FROM settings";
+
+                        $result = mysqli_query($conn, $sql) or die("Query Failed.");
+                        if(mysqli_num_rows($result) > 0){
+                            while($row = mysqli_fetch_assoc($result)) {
+                                if($row['logo']== ""){
+                                    echo '<a href="post.php"><h1>'.$row['websitename'].'</h1></a>';
+                                }else{
+                                    echo '<a href="post.php"><img class="logo" src="images/'. $row['logo'].'"></a>';                  
+                                }
+                        
+                            }
+                        }
+                    ?>
+                        <!-- <a href="post.php"><img class="logo" src="images/news.jpg"></a> -->
                     </div>
                     <!-- /LOGO -->
                       <!-- LOGO-Out -->

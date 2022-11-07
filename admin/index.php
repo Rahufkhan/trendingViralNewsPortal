@@ -21,7 +21,23 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-offset-4 col-md-4">
-                        <img class="logo" src="images/news1.png" style="height : 180px;">
+                        <?php
+                        include "config.php";
+
+                        $sql = "SELECT * FROM settings";
+
+                        $result = mysqli_query($conn, $sql) or die("Query Failed.");
+                        if(mysqli_num_rows($result) > 0){
+                            while($row = mysqli_fetch_assoc($result)) {
+                                if($row['logo']== ""){
+                                    echo '<h1>'.$row['websitename'].'</h1></a>';
+                                }else{
+                                    echo '<img class="logo" src="images/'. $row['logo'].'"  style="height : 180px;"></a>';                  
+                                }
+                        
+                            }
+                        }
+                        ?>
                         <h3 class="heading">Admin</h3>
                         <!-- Form Start -->
                         <form  action="<?php $_SERVER['PHP_SELF']; ?>" method ="POST">
@@ -40,25 +56,32 @@
                         <?php 
                             if(isset($_POST['login'])){
                                 include "config.php";
-                                $username = mysqli_real_escape_string($conn,$_POST['username']);
-                                $password = md5($_POST['password']);
-
-                                $sql = "SELECT user_id, username, role FROM user WHERE username = '{$username}' AND password = '{$password}'";
-                                
-                                $result = mysqli_query($conn,$sql) or die("Query Failed");
-                                if(mysqli_num_rows($result) > 0){
-                                    while($row = mysqli_fetch_assoc($result)){
-                                        session_start();
-                                        $_SESSION["username"] = $row['username'];
-                                        $_SESSION["user_id"] = $row['user_id'];
-                                        $_SESSION["user_role"] = $row['role'];
-
-                                        header("Location: {$hostname}/admin/post.php");
-                                    }
+                                if(empty($_POST['username']) || empty($_POST['password'])){
+                                    echo '<div class="alert alert-danger">All Field Must Be Entered.</div>';
+                                    die;
+              
                                 }else{
+                                    $username = mysqli_real_escape_string($conn,$_POST['username']);
+                                    $password = md5($_POST['password']);
+    
+                                    $sql = "SELECT user_id, username, role FROM user WHERE username = '{$username}' AND password = '{$password}'";
+                                    
+                                    $result = mysqli_query($conn,$sql) or die("Query Failed");
+                                    if(mysqli_num_rows($result) > 0){
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            session_start();
+                                            $_SESSION["username"] = $row['username'];
+                                            $_SESSION["user_id"] = $row['user_id'];
+                                            $_SESSION["user_role"] = $row['role'];
+    
+                                            header("Location: {$hostname}/admin/post.php");
+                             
+                                        }
+                                    }else{
                                     echo '<div class="alert alert-danger">Username and Password are not matched.</div>';
                                 }
                             }
+                        }
                         ?>
                     </div>
                 </div>

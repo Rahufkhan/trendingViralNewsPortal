@@ -17,8 +17,11 @@
         if($file_size > 2097152){
             $errors[] = "File size must be 2mb or lower.";
         }
+        $new_name = time(). "_".basename($file_name);
+        $target = "upload/".$new_name;
+
         if(empty($errors) == true){
-            move_uploaded_file($file_tmp,"upload/".$file_name);
+            move_uploaded_file($file_tmp,$target);
         }else{
             print_r($errors);
             die();
@@ -33,7 +36,7 @@
     $author = $_SESSION['user_id'];
 
     $sql = "INSERT INTO post(title, description, category,post_date,author,post_img)
-            VALUES('{$title}','{$description}','{$category}','{$date}',{$author},'{$file_name}');";
+            VALUES('{$title}','{$description}','{$category}','{$date}',{$author},'{$new_name}');";
 
     // query for incrimenting category number in category table
     $sql .= "UPDATE category SET post = post + 1 WHERE category_id={$category}";
