@@ -9,6 +9,7 @@
                   <a class="add-new" href="add-post.php">add post</a>
               </div>
               <div class="col-md-12">
+
               <?php
                     include "config.php";// database configuration
 
@@ -16,12 +17,15 @@
                     $limit = 3;
                     
                     if(isset($_GET['page'])){
-                        $page = $_GET['page'];
+                        $page = $_GET['page'];//get page number
                     }else{
                         $page = 1;
                     }
-
+                    //if page=1 then (1-1)*3  then offset=0
+                    //if page=2 then (2-1)*3 then offset=3
+                    //if page=3 then (3-1)*3 then offset=6
                     $offset = ($page - 1) * $limit;
+                
 
                     if($_SESSION['user_role'] == '1'){   
 
@@ -30,7 +34,7 @@
                         category.category_name,user.username, post.category FROM post 
                         LEFT JOIN category ON post.category = category.category_id
                         LEFT JOIN user ON post.author = user.user_id
-                        ORDER BY post.post_id DESC LIMIT {$offset},{$limit}";
+                        ORDER BY post.post_id DESC LIMIT {$offset},{$limit}";//limit 0,3 => limit 3,3 => limit 6,3
 
                         //select query post table for normal user
                     }else if($_SESSION['user_role'] == '0'){
@@ -45,7 +49,8 @@
 
                     if(mysqli_num_rows($result)>0){
                 ?>
-                  <table class="content-table">
+
+                    <table class="content-table">
                       <thead>
                           <th>S.No.</th>
                           <th>Title</th>
@@ -55,7 +60,8 @@
                           <th>Edit</th>
                           <th>Delete</th>
                       </thead>
-                      <tbody>
+                    <tbody>
+
                       <?php 
                       $serial = $offset + 1;
                       while($row = mysqli_fetch_assoc($result)) {?>
@@ -71,7 +77,8 @@
                         <?php 
                         $serial++;
                         } ?>
-                      </tbody>
+
+                    </tbody>
                   </table>
                   <?php    
                     }else {
@@ -83,9 +90,10 @@
                     $result1 = mysqli_query($conn,$sql1) or die("Query Failed.");
 
                     if(mysqli_num_rows($result1) > 0){
-
+                        //total_records=7
                         $total_records = mysqli_num_rows($result1);
                         
+                        //total_page = ceil(7/3) =>3
                         $total_page = ceil($total_records / $limit);
 
                         echo '<ul class="pagination admin-pagination">';

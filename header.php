@@ -42,7 +42,7 @@
         }
         break;
     default :
-        $page_title = "News Site";
+        $page_title = "Trending News Blog";
         break;
    }
 ?>

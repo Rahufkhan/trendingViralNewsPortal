@@ -21,6 +21,10 @@ if(empty($_FILES['new-image']['name'])){
     if($file_size > 2097152){
         $errors[] = "File size must be 2mb or lower.";
     }
+
+    if($file_size > 2097152){
+        $errors[] = "File size must be 2mb or lower.";
+    }
     $new_name = time(). "_".basename($file_name);
     $target = "upload/".$new_name;
     $image_name = $new_name;
@@ -42,6 +46,11 @@ if($_POST['old_category'] != $_POST["category"]){
 
 
 $result = mysqli_multi_query($conn,$sql);
+
+echo "<pre>";
+    print_r($result );
+    echo "</pre>";
+    die();
 
 if($result){
     header("location: {$hostname}/admin/post.php");

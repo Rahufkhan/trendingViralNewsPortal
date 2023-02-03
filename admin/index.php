@@ -21,6 +21,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-offset-4 col-md-4">
+
+
                         <?php
                         include "config.php";
 
@@ -38,7 +40,10 @@
                             }
                         }
                         ?>
+
+
                         <h3 class="heading">Admin</h3>
+                        
                         <!-- Form Start -->
                         <form  action="<?php $_SERVER['PHP_SELF']; ?>" method ="POST">
                             <div class="form-group">

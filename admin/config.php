@@ -1,5 +1,5 @@
 <?php
-$hostname = "http://localhost/news-site";
+ $hostname = "http://localhost/newsportal";
  $conn = mysqli_connect("localhost:3307","root", "","news-site") or die("connection failed: ". mysqli_connect_error());
 
 ?>

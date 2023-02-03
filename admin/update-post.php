@@ -41,6 +41,7 @@ if($_SESSION["user_role"] == 0){
             <div class="form-group">
                 <label for="exampleInputTile">Title</label>
                 <input type="text" name="post_title"  class="form-control" id="exampleInputUsername" value="<?php echo $row['title']; ?>">
+          
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1"> Description</label>
